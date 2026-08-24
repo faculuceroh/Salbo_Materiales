@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Catálogo de materiales de construcción SALBO – Chapas acanaladas, perfiles C, chapas trapezoidales y más. Stock permanente en Buenos Aires." />
+  <meta name="keywords" content="chapas acanaladas, perfiles C, chapas trapezoidales, materiales construcción, SALBO" />
+  <meta name="author" content="SALBO" />
+  <meta property="og:title" content="Catálogo de Materiales – SALBO" />
+  <meta property="og:description" content="Chapas, perfiles y materiales de construcción en stock. Consultá precios y disponibilidad." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.salbo.com.ar/materiales.html" />
+  <meta property="og:image" content="https://faculuceroh.github.io/Salbo_Web/assets/img/SALBO_LOGO_WEB.jpeg" />
+  <title>Materiales – SALBO Materiales de Construcción</title>
+
+  <link rel="icon" href="assets/img/SALBO_LOGO_WEB.jpeg" type="image/jpeg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/styles.css?v=10" />
+</head>
+<body data-page="materiales">
+
+  <!-- Shared header -->
+  <div id="site-header"></div>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero" aria-labelledby="ph-title">
+    <div class="page-hero__content">
+      <nav class="page-hero__breadcrumb" aria-label="Ruta de navegación">
+        <a href="index.html">Inicio</a>
+        <span class="page-hero__breadcrumb-sep" aria-hidden="true">›</span>
+        <span>Materiales</span>
+      </nav>
+      <h1 class="page-hero__title" id="ph-title">
+        Catálogo de<br><span>Materiales</span>
+      </h1>
+      <p class="page-hero__desc">
+        Todo lo que necesitás para tu construcción en un solo lugar. Stock permanente, entrega rápida y los mejores precios del AMBA.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CATÁLOGO COMPLETO ===== -->
+  <section class="materials" id="materiales" aria-labelledby="materials-title">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Catálogo completo</span>
+        <h2 class="section-title" id="materials-title">Nuestros Materiales</h2>
+        <p class="section-desc">Encontrá todo lo que necesitás para tu construcción en un solo lugar.</p>
+      </div>
+
+      <!-- Search -->
+      <div class="materials__search reveal">
+        <div class="mat-search-wrapper">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input
+            type="search"
+            id="materialSearch"
+            class="mat-search-input"
+            placeholder="Buscar materiales por nombre..."
+            aria-label="Filtrar materiales"
+            autocomplete="off"
+          />
+          <button type="button" class="mat-search-clear" id="clearSearch" aria-label="Limpiar búsqueda" hidden>✕</button>
+        </div>
+        <p class="mat-search-count" id="searchCount" aria-live="polite"></p>
+      </div>
+
+      <!-- Filter pills -->
+      <div class="materials__filters reveal" role="group" aria-label="Filtrar por categoría">
+        <button class="filter-pill active" data-filter="all">Todos</button>
+        <button class="filter-pill" data-filter="Chapas">Chapas</button>
+        <button class="filter-pill" data-filter="Perfiles">Perfiles</button>
+        <button class="filter-pill" data-filter="Tornillos">Tornillos</button>
+      </div>
+
+      <!-- Grid -->
+      <div class="materials__grid" id="materialsGrid" role="list">
+
+        <article class="mat-card reveal" data-category="Chapas" data-name="Chapa Sinusoidal Acanalada Nro 25" role="listitem">
+          <div class="mat-card__img-wrap">
+            <img src="assets/img/Chapa_Acanalada_N25.jpeg" alt="Chapa Sinusoidal Acanalada Nro 25" loading="lazy" class="mat-card__img" />
+            <span class="mat-card__badge">Más vendido</span>
+          </div>
+          <div class="mat-card__body">
+            <span class="mat-card__category">Chapas</span>
+            <h3 class="mat-card__name">Chapa Sinusoidal Acanalada Nro 25</h3>
+            <p class="mat-card__desc">Chapa de acero sinusoidal acanalada, ideal para cubiertas y revestimientos.</p>
+            <div class="mat-card__footer">
+              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Chapa Sinusoidal Acanalada Nro 25')">Consultar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="mat-card reveal" data-category="Chapas" data-name="Chapa Sinusoidal Acanalada Plástica" role="listitem">
+          <div class="mat-card__img-wrap">
+            <img src="assets/img/Chapa_Sinusoidal_Acanalada_Plastica.jpeg" alt="Chapa Sinusoidal Acanalada Plástica" loading="lazy" class="mat-card__img" />
+            <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
+          </div>
+          <div class="mat-card__body">
+            <span class="mat-card__category">Chapas</span>
+            <h3 class="mat-card__name">Chapa Sinusoidal Acanalada Plástica</h3>
+            <p class="mat-card__desc">Fabricada para alta flexibilidad y gran durabilidad, con excelente resistencia térmica.</p>
+            <div class="mat-card__footer">
+              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Chapa Sinusoidal Acanalada Plástica')">Consultar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="mat-card reveal" data-category="Chapas" data-name="Chapa Trapezoidal T101 Nro 25" role="listitem">
+          <div class="mat-card__img-wrap">
+            <img src="assets/img/Chapa_Trapezoidal_T101_Nro25.jpeg" alt="Chapa Trapezoidal T101 Nro 25" loading="lazy" class="mat-card__img" />
+            <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
+          </div>
+          <div class="mat-card__body">
+            <span class="mat-card__category">Chapas</span>
+            <h3 class="mat-card__name">Chapa Trapezoidal T101 Nro 25</h3>
+            <p class="mat-card__desc">Se utilizan en diversas aplicaciones en la construcción, brindando soluciones resistentes y de alto rendimiento. Ideales para techos industriales, almacenes y construcciones de gran escala.</p>
+            <div class="mat-card__footer">
+              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Chapa Trapezoidal T101 Nro 25')">Consultar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="mat-card reveal" data-category="Chapas" data-name="Chapa Trapezoidal T101 Plástica" role="listitem">
+          <div class="mat-card__img-wrap">
+            <img src="assets/img/Chapa_Trapezoidal_T101_Plastica.jpeg" alt="Chapa Trapezoidal T101 Plástica" loading="lazy" class="mat-card__img" />
+            <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
+          </div>
+          <div class="mat-card__body">
+            <span class="mat-card__category">Chapas</span>
+            <h3 class="mat-card__name">Chapa Trapezoidal T101 Plástica</h3>
+            <p class="mat-card__desc">Fabricada para alta flexibilidad y gran durabilidad, con excelente resistencia térmica y transmisión de luz natural.</p>
+            <div class="mat-card__footer">
+              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Chapa Trapezoidal T101 Plástica')">Consultar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="mat-card reveal" data-category="Perfiles" data-name="Perfil C Natural" role="listitem">
+          <div class="mat-card__img-wrap">
+            <img src="assets/img/Perfil_C_Natural.jpeg" alt="Perfil C Natural" loading="lazy" class="mat-card__img" />
+            <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
+          </div>
+          <div class="mat-card__body">
+            <span class="mat-card__category">Perfiles</span>
+            <h3 class="mat-card__name">Perfil C Natural</h3>
+            <p class="mat-card__desc">Perfiles C al natural, ideales para estructuras metálicas, techos, galpones y construcciones en seco.</p>
+            <div class="mat-card__footer">
+              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Perfil C Natural')">Consultar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="mat-card reveal" data-category="Perfiles" data-name="Perfil C Galvanizado" role="listitem">
+          <div class="mat-card__img-wrap">
+            <img src="assets/img/Perfil_C_Galvanizado.jpeg" alt="Perfil C Galvanizado" loading="lazy" class="mat-card__img" />
+            <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
+          </div>
+          <div class="mat-card__body">
+            <span class="mat-card__category">Perfiles</span>
+            <h3 class="mat-card__name">Perfil C Galvanizado</h3>
+            <p class="mat-card__desc">Perfiles C galvanizados, ideales para estructuras metálicas, techos, galpones y construcciones en seco. Mayor resistencia a la corrosión.</p>
+            <div class="mat-card__footer">
+              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Perfil C Galvanizado')">Consultar</button>
+            </div>
+          </div>
+        </article>
+
+
+        <article class="mat-card reveal" data-category="Tornillos" data-name="Tornillo T1 Punta Mecha" role="listitem">
+          <div class="mat-card__img-wrap">
+            <img src="assets/img/Tornillo_T1_Punta_Mecha.jpeg" alt="Tornillo T1 Punta Mecha" loading="lazy" class="mat-card__img" />
+          </div>
+          <div class="mat-card__body">
+            <span class="mat-card__category">Tornillos</span>
+            <h3 class="mat-card__name">Tornillo T1 Punta Mecha</h3>
+            <p class="mat-card__desc">Usos y Aplicaciones: Chapa + Perfil , Perfil + Perfil, SteelFraming - Estructuras Metálicas.</p>
+            <div class="mat-card__footer">
+              <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
+              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Tornillo T1 Punta Mecha')">Consultar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="mat-card reveal" data-category="Tornillos" data-name="Tornillo Autoperforante Hexa" role="listitem">
+          <div class="mat-card__img-wrap">
+            <img src="assets/img/Tornillo_Autoperforante_Hexa.jpeg" alt="Tornillo Autoperforante Hexa" loading="lazy" class="mat-card__img" />
+          </div>
+          <div class="mat-card__body">
+            <span class="mat-card__category">Tornillos</span>
+            <h3 class="mat-card__name">Tornillo Autoperforante Hexa</h3>
+            <p class="mat-card__desc">Usos y Aplicaciones: Chapa + Perfil, Perfil + Perfil, Steel Framing - Estructuras Metálicas , Tornillo para metal.</p>
+            <div class="mat-card__footer">
+              <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
+              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Tornillo Autoperforante Hexa')">Consultar</button>
+            </div>
+          </div>
+        </article>
+
+         <article class="mat-card reveal" data-category="Tornillos" data-name="Tornillo Autoperforante Hexa Arandela Vulcanizada" role="listitem">
+          <div class="mat-card__img-wrap">
+            <img src="assets/img/Tornillo_Autoperforante_Hexa_Arandela_Vulcanizada.jpeg" alt="Tornillo Autoperforante Hexa Arandela Vulcanizada" loading="lazy" class="mat-card__img" />
+          </div>
+          <div class="mat-card__body">
+            <span class="mat-card__category">Tornillos</span>
+            <h3 class="mat-card__name">Tornillo Autoperforante Hexa Arandela Vulcanizada</h3>
+            <p class="mat-card__desc">Usos y Aplicaciones: Chapa + Perfil, Perfil + Perfil, Steel Framing - Estructuras Metálicas , Tornillo para metal.</p>
+            <div class="mat-card__footer">
+              <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
+              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Tornillo Autoperforante Hexa Arandela Vulcanizada')">Consultar</button>
+            </div>
+          </div>
+        </article>
+
+         <article class="mat-card reveal" data-category="Tornillos" data-name="Tornillo Flix Punta Mecha" role="listitem">
+          <div class="mat-card__img-wrap">
+            <img src="assets/img/Tornillo_Flix_punta_mecha.jpeg" alt="Tornillo Flix Punta Mecha" loading="lazy" class="mat-card__img" />
+          </div>
+          <div class="mat-card__body">
+            <span class="mat-card__category">Tornillos</span>
+            <h3 class="mat-card__name">Tornillo Flix Punta Mecha</h3>
+            <p class="mat-card__desc">Usos y Aplicaciones: Chapa + Perfil , Perfil + Perfil, SteelFraming - Estructuras Metálicas.</p>
+            <div class="mat-card__footer">
+              <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
+              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Tornillo Flix Punta Mecha')">Consultar</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- No results -->
+      <div class="materials__no-results" id="noResults" hidden aria-live="polite">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <p>No contamos con ese material por el momento.</p>
+        <button class="btn btn--outline" id="noResultsClear" onclick="clearSearch()" hidden>Ver todos los demás materiales</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BANNER ===== -->
+  <section class="cta-banner" aria-labelledby="cta-mat-title">
+    <div class="cta-banner__content reveal">
+      <span class="cta-banner__tag">¿Necesitás un producto?</span>
+      <h2 class="cta-banner__title" id="cta-mat-title">¿No encontraste lo que buscás?</h2>
+      <p class="cta-banner__desc">Consultanos directamente. Tenemos acceso a una amplia gama de productos y proveedores para conseguir lo que necesitás.</p>
+      <div class="cta-banner__actions">
+        <a href="contacto.html" class="btn btn--primary btn--lg">
+          Hacer una consulta
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        </a>
+        <a href="https://wa.me/5491128482518" target="_blank" rel="noopener noreferrer" class="btn btn--wa btn--lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shared footer -->
+  <div id="site-footer"></div>
+
+  <!-- Modal consulta -->
+  <div class="modal" id="consultModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal__backdrop" onclick="closeConsult()"></div>
+    <div class="modal__box">
+      <button class="modal__close" onclick="closeConsult()" aria-label="Cerrar">✕</button>
+      <div class="modal__icon" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <h3 class="modal__title" id="modalTitle">Consultar producto</h3>
+      <p class="modal__product" id="modalProduct"></p>
+      <p class="modal__desc">¿Querés consultar sobre este producto? Escribinos por WhatsApp o completá el formulario de contacto.</p>
+      <div class="modal__actions">
+        <a href="https://wa.me/5491128482518" target="_blank" rel="noopener noreferrer" class="btn btn--wa btn--full">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          Consultar por WhatsApp
+        </a>
+        <a href="contacto.html" class="btn btn--outline btn--full" onclick="closeConsult()">
+          Ir al formulario de contacto
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/shared.js?v=8" defer></script>
+  <script src="assets/js/main.js?v=8" defer></script>
+</body>
+</html>
