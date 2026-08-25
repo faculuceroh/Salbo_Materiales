@@ -23,7 +23,7 @@
     rel="stylesheet" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=26" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=27" />
 </head>
 
 <body data-page="inicio">
@@ -200,64 +200,41 @@
         <p class="section-desc">Chapas, perfiles y más. Stock permanente para que tu obra no se detenga.</p>
       </div>
 
-      <div class="materials__grid">
+      <!-- Acordeón (mismo componente que materiales.html): cada <article>
+           se completa vía JS a partir de sus data-*. -->
+      <div class="mat-accordion" id="materialsGrid" role="list">
 
-        <!-- Chapa Acanalada N°25 -->
-        <article class="mat-card reveal" data-category="Chapas" data-name="Chapa Sinusoidal Acanalada Nro 25"
-          role="listitem">
-          <div class="mat-card__img-wrap">
-            <img src="assets/img/Chapa_Acanalada_N25.jpeg" alt="Chapa Sinusoidal Acanalada Nro 25" loading="lazy"
-              class="mat-card__img" />
-            <span class="mat-card__badge">Más vendido</span>
-          </div>
-          <div class="mat-card__body">
-            <span class="mat-card__category">Chapas</span>
-            <h3 class="mat-card__name">Chapa Sinusoidal Acanalada Nro 25</h3>
-            <p class="mat-card__desc">Chapa de acero sinusoidal acanalada, ideal para cubiertas y revestimientos.</p>
-            <div class="mat-card__footer">
-              <button class="btn btn--primary btn--sm mat-card__btn"
-                onclick="openConsult('Chapa Sinusoidal Acanalada Nro 25')">Consultar</button>
-            </div>
-          </div>
+        <article class="mat-accordion-item reveal" role="listitem"
+          data-category="Chapas"
+          data-name="Chapas"
+          data-badge="Más vendido" data-badge-variant="featured"
+          data-cover="assets/img/Salbo_fondo.webp"
+          data-gallery="assets/img/Chapa_Acanalada_N25.jpeg,assets/img/Chapa_Sinusoidal_Acanalada_Plastica.jpeg,assets/img/Chapa_Trapezoidal_T101_Nro25.jpeg,assets/img/Chapa_Trapezoidal_T101_Plastica.jpeg"
+          data-desc="Chapas conformadas para cubiertas, revestimientos laterales, paneles y todo tipo de uso en la construcción. Contamos con modelos acanalados y trapezoidales, en metal y en versión plástica traslúcida."
+          data-specs-title="Medidas (versión metálica)" data-specs="Calibre 25|Calibre 27|1,10 m de ancho|Hasta 13 m de largo"
+          data-bullets-title="Con qué contamos" data-bullets="Chapa Acanalada: Galvanizada, Cincalum o Prepintada|Chapa Trapezoidal T101: Cincalum o Prepintada|Ambos modelos en plástico: Policarbonato, Fibra de vidrio o Polipropileno">
         </article>
 
-        <!-- Perfil C Natural -->
-        <article class="mat-card reveal" data-category="Perfiles" data-name="Perfil C Natural" role="listitem">
-          <div class="mat-card__img-wrap">
-            <img src="assets/img/Perfil_C_Natural.jpeg" alt="Perfiles C al Natural" loading="lazy"
-              class="mat-card__img" />
-            <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
-          </div>
-          <div class="mat-card__body">
-            <span class="mat-card__category">Perfiles</span>
-            <h3 class="mat-card__name">Perfil C Natural</h3>
-            <p class="mat-card__desc">Perfiles C galvanizados y al natural, ideales para estructuras metálicas, techos,
-              galpones y construcciones en seco.</p>
-            <div class="mat-card__footer">
-              <button class="btn btn--primary btn--sm mat-card__btn"
-                onclick="openConsult('Perfil C Natural')">Consultar</button>
-            </div>
-          </div>
+        <article class="mat-accordion-item reveal" role="listitem"
+          data-category="Perfiles"
+          data-name="Perfil C"
+          data-badge="EN STOCK" data-badge-variant="stock"
+          data-cover="assets/img/INICIO4.webp"
+          data-gallery="assets/img/Perfil_C_Galvanizado.jpeg,assets/img/Perfil_C_Natural.jpeg"
+          data-desc="De amplio uso en la industria de la construcción: ofrece flexibilidad y rapidez en la construcción de estructuras metálicas. Disponible en acabado negro (natural) y galvanizado, con mayor resistencia a la corrosión."
+          data-specs-title="Medidas" data-specs="Tiras de 12 m de largo|Varios espesores disponibles"
+          data-bullets-title="Acabados disponibles" data-bullets="Negro (natural)|Galvanizado">
         </article>
 
-        <!-- Chapa Trapezoidal T101 -->
-        <article class="mat-card reveal" data-category="Chapas" data-name="Chapa Trapezoidal T101 Nro 25"
-          role="listitem">
-          <div class="mat-card__img-wrap">
-            <img src="assets/img/Chapa_Trapezoidal_T101_Nro25.jpeg" alt="Chapa Trapezoidal T101 Nro 25" loading="lazy"
-              class="mat-card__img" />
-            <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
-          </div>
-          <div class="mat-card__body">
-            <span class="mat-card__category">Chapas</span>
-            <h3 class="mat-card__name">Chapa Trapezoidal T101 Nro 25</h3>
-            <p class="mat-card__desc">Se utilizan en diversas aplicaciones en la construcción, brindando soluciones
-              resistentes y de alto rendimiento.</p>
-            <div class="mat-card__footer">
-              <button class="btn btn--primary btn--sm mat-card__btn"
-                onclick="openConsult('Chapa Trapezoidal T101 Nro 25')">Consultar</button>
-            </div>
-          </div>
+        <article class="mat-accordion-item reveal" role="listitem"
+          data-category="Tornillos"
+          data-name="Tornillos"
+          data-badge="EN STOCK" data-badge-variant="stock"
+          data-cover="assets/img/Salbo_Fondo2.webp"
+          data-gallery="assets/img/Tornillo_T1_Punta_Mecha.jpeg,assets/img/Tornillo_Autoperforante_Hexa.jpeg,assets/img/Tornillo_Autoperforante_Hexa_Arandela_Vulcanizada.jpeg,assets/img/Tornillo_Flix_punta_mecha.jpeg"
+          data-desc="Tornillos autoperforantes y punta mecha para fijaciones en chapa, perfil, Steel Framing y estructuras metálicas. Elegí el tipo de cabeza y la medida según tu necesidad."
+          data-specs-title="Medidas disponibles" data-specs="8x1/2&quot;|8x3/4&quot;|8x1&quot;|10x1/2&quot;|10x3/4&quot;|10x1&quot;|10x1 1/4&quot;|10x1 1/2&quot;|10x2&quot;|12x1&quot;|12x1 1/2&quot;|12x2&quot;|14x1&quot;|14x1 1/2&quot;|14x2&quot;|14x2 1/2&quot;|14x3&quot;"
+          data-bullets-title="Con qué contamos" data-bullets="Tornillo T1 Punta Mecha Zinc|Tornillo Autoperforante Hexa|Tornillo Autoperforante Hexa Arandela Vulcanizada|Tornillo Flix Punta Mecha">
         </article>
 
       </div>
@@ -350,7 +327,7 @@
 
   <!-- JS -->
   <script src="assets/js/shared.js?v=10" defer></script>
-  <script src="assets/js/main.js?v=22" defer></script>
+  <script src="assets/js/main.js?v=23" defer></script>
 </body>
 
 </html>
