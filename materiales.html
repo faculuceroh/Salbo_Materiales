@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="assets/css/styles.css?v=10" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=26" />
 </head>
 <body data-page="materiales">
 
@@ -52,192 +52,140 @@
         <p class="section-desc">Encontrá todo lo que necesitás para tu construcción en un solo lugar.</p>
       </div>
 
-      <!-- Search -->
-      <div class="materials__search reveal">
-        <div class="mat-search-wrapper">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <input
-            type="search"
-            id="materialSearch"
-            class="mat-search-input"
-            placeholder="Buscar materiales por nombre..."
-            aria-label="Filtrar materiales"
-            autocomplete="off"
-          />
-          <button type="button" class="mat-search-clear" id="clearSearch" aria-label="Limpiar búsqueda" hidden>✕</button>
-        </div>
-        <p class="mat-search-count" id="searchCount" aria-live="polite"></p>
+      <!-- Category tabs -->
+      <div class="materials__tabs reveal" role="group" aria-label="Pestañas de categoría">
+        <button class="mat-tab active" data-filter="all" aria-pressed="true">
+          <span class="mat-tab__icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          </span>
+          Todos
+          <span class="mat-tab__count" data-count="all"></span>
+        </button>
+        <button class="mat-tab" data-filter="Chapas" aria-pressed="false">
+          <span class="mat-tab__icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M3 16c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg>
+          </span>
+          Chapas
+          <span class="mat-tab__count" data-count="Chapas"></span>
+        </button>
+        <button class="mat-tab" data-filter="Perfiles" aria-pressed="false">
+          <span class="mat-tab__icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16M20 4v16M4 4h4M4 20h4M16 4h4M16 20h4"/></svg>
+          </span>
+          Perfiles
+          <span class="mat-tab__count" data-count="Perfiles"></span>
+        </button>
+        <button class="mat-tab" data-filter="Tornillos" aria-pressed="false">
+          <span class="mat-tab__icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7"/></svg>
+          </span>
+          Tornillos
+          <span class="mat-tab__count" data-count="Tornillos"></span>
+        </button>
+        <button class="mat-tab mat-tab--extra" data-filter="Caños Estructurales" aria-pressed="false" hidden>
+          <span class="mat-tab__icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/></svg>
+          </span>
+          Caños Estructurales
+          <span class="mat-tab__count" data-count="Caños Estructurales"></span>
+        </button>
+        <button class="mat-tab mat-tab--extra" data-filter="Aislación" aria-pressed="false" hidden>
+          <span class="mat-tab__icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.5a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/><path d="M12 9v6"/></svg>
+          </span>
+          Aislación
+          <span class="mat-tab__count" data-count="Aislación"></span>
+        </button>
+        <button class="mat-tab mat-tab--extra" data-filter="Selladores" aria-pressed="false" hidden>
+          <span class="mat-tab__icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c0 0-7 8-7 13a7 7 0 0 0 14 0c0-5-7-13-7-13Z"/></svg>
+          </span>
+          Selladores
+          <span class="mat-tab__count" data-count="Selladores"></span>
+        </button>
+        <button type="button" class="mat-tab mat-tab--more" id="tabsMoreBtn" aria-expanded="false">
+          <span class="mat-tab__more-label">Mostrar más</span>
+          <span class="mat-tab__icon mat-tab__icon--chevron" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+        </button>
       </div>
 
-      <!-- Filter pills -->
-      <div class="materials__filters reveal" role="group" aria-label="Filtrar por categoría">
-        <button class="filter-pill active" data-filter="all">Todos</button>
-        <button class="filter-pill" data-filter="Chapas">Chapas</button>
-        <button class="filter-pill" data-filter="Perfiles">Perfiles</button>
-        <button class="filter-pill" data-filter="Tornillos">Tornillos</button>
-      </div>
+      <!-- Acordeón de materiales: cada <article> se completa vía JS
+           a partir de sus data-*. Para sumar un material nuevo, alcanza
+           con agregar un <article> más con los mismos atributos. -->
+      <div class="mat-accordion" id="materialsGrid" role="list">
 
-      <!-- Grid -->
-      <div class="materials__grid" id="materialsGrid" role="list">
-
-        <article class="mat-card reveal" data-category="Chapas" data-name="Chapa Sinusoidal Acanalada Nro 25" role="listitem">
-          <div class="mat-card__img-wrap">
-            <img src="assets/img/Chapa_Acanalada_N25.jpeg" alt="Chapa Sinusoidal Acanalada Nro 25" loading="lazy" class="mat-card__img" />
-            <span class="mat-card__badge">Más vendido</span>
-          </div>
-          <div class="mat-card__body">
-            <span class="mat-card__category">Chapas</span>
-            <h3 class="mat-card__name">Chapa Sinusoidal Acanalada Nro 25</h3>
-            <p class="mat-card__desc">Chapa de acero sinusoidal acanalada, ideal para cubiertas y revestimientos.</p>
-            <div class="mat-card__footer">
-              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Chapa Sinusoidal Acanalada Nro 25')">Consultar</button>
-            </div>
-          </div>
+        <article class="mat-accordion-item reveal" role="listitem"
+          data-category="Chapas"
+          data-name="Chapa Acanalada"
+          data-badge="Más vendido" data-badge-variant="featured"
+          data-gallery="assets/img/Chapa_Acanalada_N25.jpeg,assets/img/Chapa_Sinusoidal_Acanalada_Plastica.jpeg"
+          data-desc="Chapa conformada para cubiertas, revestimientos laterales, paneles y todo tipo de uso en la construcción. Disponible en metal y en versión plástica traslúcida."
+          data-specs-title="Medidas (versión metálica)" data-specs="Calibre 25|Calibre 27|1,10 m de ancho|Hasta 13 m de largo"
+          data-bullets-title="Con qué contamos" data-bullets="Metálica: Galvanizada, Cincalum o Prepintada|Plástica: Policarbonato, Fibra de vidrio o Polipropileno">
         </article>
 
-        <article class="mat-card reveal" data-category="Chapas" data-name="Chapa Sinusoidal Acanalada Plástica" role="listitem">
-          <div class="mat-card__img-wrap">
-            <img src="assets/img/Chapa_Sinusoidal_Acanalada_Plastica.jpeg" alt="Chapa Sinusoidal Acanalada Plástica" loading="lazy" class="mat-card__img" />
-            <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
-          </div>
-          <div class="mat-card__body">
-            <span class="mat-card__category">Chapas</span>
-            <h3 class="mat-card__name">Chapa Sinusoidal Acanalada Plástica</h3>
-            <p class="mat-card__desc">Fabricada para alta flexibilidad y gran durabilidad, con excelente resistencia térmica.</p>
-            <div class="mat-card__footer">
-              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Chapa Sinusoidal Acanalada Plástica')">Consultar</button>
-            </div>
-          </div>
+        <article class="mat-accordion-item reveal" role="listitem"
+          data-category="Chapas"
+          data-name="Chapa Trapezoidal T101"
+          data-badge="EN STOCK" data-badge-variant="stock"
+          data-gallery="assets/img/Chapa_Trapezoidal_T101_Nro25.jpeg,assets/img/Chapa_Trapezoidal_T101_Plastica.jpeg"
+          data-desc="Chapa conformada Trapezoidal T101, ideal para cubiertas, revestimientos laterales, paneles y todo tipo de uso en la construcción. Disponible en metal y en versión plástica traslúcida."
+          data-specs-title="Medidas (versión metálica)" data-specs="Calibre 25|Calibre 27|1,10 m de ancho|Hasta 13 m de largo"
+          data-bullets-title="Con qué contamos" data-bullets="Metálica: Cincalum o Prepintada|Plástica: Policarbonato, Fibra de vidrio o Polipropileno">
         </article>
 
-        <article class="mat-card reveal" data-category="Chapas" data-name="Chapa Trapezoidal T101 Nro 25" role="listitem">
-          <div class="mat-card__img-wrap">
-            <img src="assets/img/Chapa_Trapezoidal_T101_Nro25.jpeg" alt="Chapa Trapezoidal T101 Nro 25" loading="lazy" class="mat-card__img" />
-            <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
-          </div>
-          <div class="mat-card__body">
-            <span class="mat-card__category">Chapas</span>
-            <h3 class="mat-card__name">Chapa Trapezoidal T101 Nro 25</h3>
-            <p class="mat-card__desc">Se utilizan en diversas aplicaciones en la construcción, brindando soluciones resistentes y de alto rendimiento. Ideales para techos industriales, almacenes y construcciones de gran escala.</p>
-            <div class="mat-card__footer">
-              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Chapa Trapezoidal T101 Nro 25')">Consultar</button>
-            </div>
-          </div>
+        <article class="mat-accordion-item reveal" role="listitem"
+          data-category="Perfiles"
+          data-name="Perfil C"
+          data-badge="EN STOCK" data-badge-variant="stock"
+          data-gallery="assets/img/Perfil_C_Galvanizado.jpeg,assets/img/Perfil_C_Natural.jpeg"
+          data-desc="De amplio uso en la industria de la construcción: ofrece flexibilidad y rapidez en la construcción de estructuras metálicas. Disponible en acabado negro (natural) y galvanizado, con mayor resistencia a la corrosión."
+          data-specs-title="Medidas" data-specs="Tiras de 12 m de largo|Varios espesores disponibles"
+          data-bullets-title="Acabados disponibles" data-bullets="Negro (natural)|Galvanizado">
         </article>
 
-        <article class="mat-card reveal" data-category="Chapas" data-name="Chapa Trapezoidal T101 Plástica" role="listitem">
-          <div class="mat-card__img-wrap">
-            <img src="assets/img/Chapa_Trapezoidal_T101_Plastica.jpeg" alt="Chapa Trapezoidal T101 Plástica" loading="lazy" class="mat-card__img" />
-            <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
-          </div>
-          <div class="mat-card__body">
-            <span class="mat-card__category">Chapas</span>
-            <h3 class="mat-card__name">Chapa Trapezoidal T101 Plástica</h3>
-            <p class="mat-card__desc">Fabricada para alta flexibilidad y gran durabilidad, con excelente resistencia térmica y transmisión de luz natural.</p>
-            <div class="mat-card__footer">
-              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Chapa Trapezoidal T101 Plástica')">Consultar</button>
-            </div>
-          </div>
+        <article class="mat-accordion-item reveal" role="listitem"
+          data-category="Tornillos"
+          data-name="Tornillos"
+          data-badge="EN STOCK" data-badge-variant="stock"
+          data-gallery="assets/img/Tornillo_T1_Punta_Mecha.jpeg,assets/img/Tornillo_Autoperforante_Hexa.jpeg,assets/img/Tornillo_Autoperforante_Hexa_Arandela_Vulcanizada.jpeg,assets/img/Tornillo_Flix_punta_mecha.jpeg"
+          data-desc="Tornillos autoperforantes y punta mecha para fijaciones en chapa, perfil, Steel Framing y estructuras metálicas. Elegí el tipo de cabeza y la medida según tu necesidad."
+          data-specs-title="Medidas disponibles" data-specs="8x1/2&quot;|8x3/4&quot;|8x1&quot;|10x1/2&quot;|10x3/4&quot;|10x1&quot;|10x1 1/4&quot;|10x1 1/2&quot;|10x2&quot;|12x1&quot;|12x1 1/2&quot;|12x2&quot;|14x1&quot;|14x1 1/2&quot;|14x2&quot;|14x2 1/2&quot;|14x3&quot;"
+          data-bullets-title="Con qué contamos" data-bullets="Tornillo T1 Punta Mecha Zinc|Tornillo Autoperforante Hexa|Tornillo Autoperforante Hexa Arandela Vulcanizada|Tornillo Flix Punta Mecha">
         </article>
 
-        <article class="mat-card reveal" data-category="Perfiles" data-name="Perfil C Natural" role="listitem">
-          <div class="mat-card__img-wrap">
-            <img src="assets/img/Perfil_C_Natural.jpeg" alt="Perfil C Natural" loading="lazy" class="mat-card__img" />
-            <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
-          </div>
-          <div class="mat-card__body">
-            <span class="mat-card__category">Perfiles</span>
-            <h3 class="mat-card__name">Perfil C Natural</h3>
-            <p class="mat-card__desc">Perfiles C al natural, ideales para estructuras metálicas, techos, galpones y construcciones en seco.</p>
-            <div class="mat-card__footer">
-              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Perfil C Natural')">Consultar</button>
-            </div>
-          </div>
+        <article class="mat-accordion-item reveal" role="listitem"
+          data-category="Caños Estructurales"
+          data-name="Caño Estructural "
+          data-badge="EN STOCK" data-badge-variant="stock"
+          data-gallery="assets/img/Cano_Estructural_40x40.png"
+          data-desc="Solución versátil para estructuras metálicas y trabajos de herrería."
+          data-specs-title="Medidas" data-specs="Sección 40 x 40 mm|Disponible en varios espesores"
+          data-bullets-title="Usos y aplicaciones" data-bullets="Estructuras metálicas|Soportes|Bastidores">
         </article>
 
-        <article class="mat-card reveal" data-category="Perfiles" data-name="Perfil C Galvanizado" role="listitem">
-          <div class="mat-card__img-wrap">
-            <img src="assets/img/Perfil_C_Galvanizado.jpeg" alt="Perfil C Galvanizado" loading="lazy" class="mat-card__img" />
-            <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
-          </div>
-          <div class="mat-card__body">
-            <span class="mat-card__category">Perfiles</span>
-            <h3 class="mat-card__name">Perfil C Galvanizado</h3>
-            <p class="mat-card__desc">Perfiles C galvanizados, ideales para estructuras metálicas, techos, galpones y construcciones en seco. Mayor resistencia a la corrosión.</p>
-            <div class="mat-card__footer">
-              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Perfil C Galvanizado')">Consultar</button>
-            </div>
-          </div>
+        <article class="mat-accordion-item reveal" role="listitem"
+          data-category="Aislación"
+          data-name="Lana de Vidrio Foil Aluminio"
+          data-badge="EN STOCK" data-badge-variant="stock"
+          data-gallery="assets/img/Lana_de_Vidrio_Foil_Aluminio.png"
+          data-desc="Aislación térmica y acústica, ideal para cubiertas, cerramientos y cielorrasos."
+          data-specs-title="Espesores disponibles" data-specs="38 mm|50 mm"
+          data-bullets-title="Características" data-bullets="Revestimiento con foil de aluminio o blanco|Aislación térmica|Aislación acústica">
         </article>
 
-
-        <article class="mat-card reveal" data-category="Tornillos" data-name="Tornillo T1 Punta Mecha" role="listitem">
-          <div class="mat-card__img-wrap">
-            <img src="assets/img/Tornillo_T1_Punta_Mecha.jpeg" alt="Tornillo T1 Punta Mecha" loading="lazy" class="mat-card__img" />
-          </div>
-          <div class="mat-card__body">
-            <span class="mat-card__category">Tornillos</span>
-            <h3 class="mat-card__name">Tornillo T1 Punta Mecha</h3>
-            <p class="mat-card__desc">Usos y Aplicaciones: Chapa + Perfil , Perfil + Perfil, SteelFraming - Estructuras Metálicas.</p>
-            <div class="mat-card__footer">
-              <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
-              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Tornillo T1 Punta Mecha')">Consultar</button>
-            </div>
-          </div>
+        <article class="mat-accordion-item reveal" role="listitem"
+          data-category="Selladores"
+          data-name="Sellador de Poliuretano"
+          data-badge="EN STOCK" data-badge-variant="stock"
+          data-gallery="assets/img/Sellador_Poliuretano.png"
+          data-desc="Alta adherencia para sellados y uniones en construcción y estructuras."
+          data-specs-title="Colores disponibles" data-specs="Gris|Blanco|Negro"
+          data-bullets-title="Usos y aplicaciones" data-bullets="Sellados y uniones|Aplicaciones en construcción y estructuras|Terminaciones en múltiples aplicaciones">
         </article>
 
-        <article class="mat-card reveal" data-category="Tornillos" data-name="Tornillo Autoperforante Hexa" role="listitem">
-          <div class="mat-card__img-wrap">
-            <img src="assets/img/Tornillo_Autoperforante_Hexa.jpeg" alt="Tornillo Autoperforante Hexa" loading="lazy" class="mat-card__img" />
-          </div>
-          <div class="mat-card__body">
-            <span class="mat-card__category">Tornillos</span>
-            <h3 class="mat-card__name">Tornillo Autoperforante Hexa</h3>
-            <p class="mat-card__desc">Usos y Aplicaciones: Chapa + Perfil, Perfil + Perfil, Steel Framing - Estructuras Metálicas , Tornillo para metal.</p>
-            <div class="mat-card__footer">
-              <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
-              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Tornillo Autoperforante Hexa')">Consultar</button>
-            </div>
-          </div>
-        </article>
-
-         <article class="mat-card reveal" data-category="Tornillos" data-name="Tornillo Autoperforante Hexa Arandela Vulcanizada" role="listitem">
-          <div class="mat-card__img-wrap">
-            <img src="assets/img/Tornillo_Autoperforante_Hexa_Arandela_Vulcanizada.jpeg" alt="Tornillo Autoperforante Hexa Arandela Vulcanizada" loading="lazy" class="mat-card__img" />
-          </div>
-          <div class="mat-card__body">
-            <span class="mat-card__category">Tornillos</span>
-            <h3 class="mat-card__name">Tornillo Autoperforante Hexa Arandela Vulcanizada</h3>
-            <p class="mat-card__desc">Usos y Aplicaciones: Chapa + Perfil, Perfil + Perfil, Steel Framing - Estructuras Metálicas , Tornillo para metal.</p>
-            <div class="mat-card__footer">
-              <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
-              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Tornillo Autoperforante Hexa Arandela Vulcanizada')">Consultar</button>
-            </div>
-          </div>
-        </article>
-
-         <article class="mat-card reveal" data-category="Tornillos" data-name="Tornillo Flix Punta Mecha" role="listitem">
-          <div class="mat-card__img-wrap">
-            <img src="assets/img/Tornillo_Flix_punta_mecha.jpeg" alt="Tornillo Flix Punta Mecha" loading="lazy" class="mat-card__img" />
-          </div>
-          <div class="mat-card__body">
-            <span class="mat-card__category">Tornillos</span>
-            <h3 class="mat-card__name">Tornillo Flix Punta Mecha</h3>
-            <p class="mat-card__desc">Usos y Aplicaciones: Chapa + Perfil , Perfil + Perfil, SteelFraming - Estructuras Metálicas.</p>
-            <div class="mat-card__footer">
-              <span class="mat-card__badge mat-card__badge--GREEN">EN STOCK</span>
-              <button class="btn btn--primary btn--sm mat-card__btn" onclick="openConsult('Tornillo Flix Punta Mecha')">Consultar</button>
-            </div>
-          </div>
-        </article>
-
-      </div>
-
-      <!-- No results -->
-      <div class="materials__no-results" id="noResults" hidden aria-live="polite">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <p>No contamos con ese material por el momento.</p>
-        <button class="btn btn--outline" id="noResultsClear" onclick="clearSearch()" hidden>Ver todos los demás materiales</button>
       </div>
     </div>
   </section>
@@ -287,7 +235,7 @@
     </div>
   </div>
 
-  <script src="assets/js/shared.js?v=8" defer></script>
-  <script src="assets/js/main.js?v=8" defer></script>
+  <script src="assets/js/shared.js?v=10" defer></script>
+  <script src="assets/js/main.js?v=22" defer></script>
 </body>
 </html>
