@@ -1964,20 +1964,6 @@ img[src$=".jpg"]:not([src^="http"]) {
   color: var(--white);
 }
 
-/* Hero de Nosotros ("Construyendo confianza"): mismo degradé, de fondo
-   una foto en vez de color plano */
-body[data-page="nosotros"] .page-hero {
-  background:
-    linear-gradient(135deg, rgba(10,25,41,.88) 0%, rgba(13,71,161,.82) 60%, rgba(21,101,192,.75) 100%),
-    url('../img/Salbo_fondo.webp') center / cover no-repeat;
-}
-
-body[data-page="nosotros"] .page-hero__title,
-body[data-page="materiales"] .page-hero__title,
-body[data-page="contacto"] .page-hero__title {
-  font-family: var(--font-display);
-}
-
 /* Patrón radial decorativo */
 .page-hero::before {
   content: '';
