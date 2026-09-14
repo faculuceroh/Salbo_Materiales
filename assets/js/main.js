@@ -57,8 +57,8 @@
     nav.classList.contains('open') ? closeMenu() : openMenu();
   });
 
-  /* Cerrar al hacer click en un link de nav o en un link del dropdown */
-  nav.querySelectorAll('.nav__link, .nav__dropdown-link').forEach(link => {
+  /* Cerrar al hacer click en un link de nav */
+  nav.querySelectorAll('.nav__link').forEach(link => {
     link.addEventListener('click', closeMenu);
   });
 
@@ -74,45 +74,6 @@
   /* Cerrar con Escape */
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && nav.classList.contains('open')) closeMenu();
-  });
-})();
-
-/* ── Nav Dropdown (toggle mobile, hover desktop via CSS) ── */
-(function initNavDropdown() {
-  /* El botón chevron abre/cierra el submenu en mobile.
-     En desktop el dropdown se muestra por CSS :hover. */
-  const toggleBtns = document.querySelectorAll('.nav__dropdown-toggle');
-  if (!toggleBtns.length) return;
-
-  toggleBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const item   = btn.closest('.nav__item--has-dropdown');
-      const isOpen = item.classList.toggle('is-open');
-      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-  });
-
-  /* Cerrar dropdown al hacer click fuera */
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.nav__item--has-dropdown')) {
-      document.querySelectorAll('.nav__item--has-dropdown.is-open').forEach(item => {
-        item.classList.remove('is-open');
-        const btn = item.querySelector('.nav__dropdown-toggle');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-      });
-    }
-  });
-
-  /* Cerrar con Escape */
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.nav__item--has-dropdown.is-open').forEach(item => {
-        item.classList.remove('is-open');
-        const btn = item.querySelector('.nav__dropdown-toggle');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-      });
-    }
   });
 })();
 
@@ -193,7 +154,7 @@
 (function initHeroCarousel() {
 
   /* ── 1. Configuración ──────────────────────────────── */
-  const INTERVAL   = 12000;  // ms entre slides (12 s)
+  const INTERVAL   = 5000;   // ms entre slides (5 s)
   const FADE_DUR   = 1000;   // ms de duración del fade
   const PAUSE_HOVER = true;  // pausar al pasar el mouse
 
@@ -219,19 +180,14 @@
   /* ── 2. Referencias DOM ────────────────────────────── */
   const carousel   = document.getElementById('heroCarousel');
   const track      = document.getElementById('hcTrack');
-  const dotsWrap   = document.getElementById('hcDots');
-  const btnPrev    = document.getElementById('hcPrev');
-  const btnNext    = document.getElementById('hcNext');
   const elCurrent  = document.getElementById('hcCurrent');
   const elTotal    = document.getElementById('hcTotal');
-  const progressBar= document.getElementById('hcProgressBar');
 
   if (!carousel || !track) return;
 
   /* ── 3. Estado interno ─────────────────────────────── */
   let current       = 0;
   let timer         = null;
-  let progressTimer = null;
   let isAnimating   = false;
   let isPaused      = false;
   let touchStartX   = 0;
@@ -292,33 +248,13 @@
     });
   }
 
-  /* ── 6. Construir puntos ───────────────────────────── */
-  function buildDots() {
-    dotsWrap.innerHTML = '';
-    CAROUSEL_SLIDES.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.className = 'hc__dot' + (i === 0 ? ' is-active' : '');
-      dot.setAttribute('role', 'tab');
-      dot.setAttribute('aria-label', `Ir a imagen ${i + 1}`);
-      dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
-      dot.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(dot);
-    });
-  }
-
-  /* ── 7. Actualizar UI ──────────────────────────────── */
+  /* ── 6. Actualizar UI (contador, si existe en el DOM) ── */
   function updateUI(nextIdx) {
-    /* Dots */
-    dotsWrap.querySelectorAll('.hc__dot').forEach((d, i) => {
-      d.classList.toggle('is-active', i === nextIdx);
-      d.setAttribute('aria-selected', i === nextIdx ? 'true' : 'false');
-    });
-    /* Contador */
     if (elCurrent) elCurrent.textContent = nextIdx + 1;
     if (elTotal)   elTotal.textContent   = total;
   }
 
-  /* ── 8. Transición entre slides ────────────────────── */
+  /* ── 7. Transición entre slides ────────────────────── */
   function goTo(nextIdx, immediate = false) {
     if (isAnimating && !immediate) return;
     if (nextIdx === current && !immediate) return;
@@ -346,44 +282,23 @@
       prevSlide.classList.remove('is-leaving');
       isAnimating = false;
     }, FADE_DUR);
-
-    /* Reiniciar progreso */
-    resetProgress();
   }
 
   function goNext() { goTo((current + 1) % total); }
   function goPrev() { goTo((current - 1 + total) % total); }
 
-  /* ── 9. Barra de progreso animada ──────────────────── */
-  function resetProgress() {
-    if (!progressBar) return;
-    clearInterval(progressTimer);
-    progressBar.style.transition = 'none';
-    progressBar.style.width = '0%';
-
-    /* Forzar reflow para reiniciar la transición */
-    void progressBar.offsetWidth;
-    progressBar.style.transition = `width ${INTERVAL}ms linear`;
-    progressBar.style.width = '100%';
-  }
-
-  /* ── 10. Auto-avance ───────────────────────────────── */
+  /* ── 9. Auto-avance ────────────────────────────────── */
   function startAuto() {
     clearInterval(timer);
     timer = setInterval(() => {
       if (!isPaused) goNext();
     }, INTERVAL);
-    resetProgress();
   }
 
-  function pauseAuto()  { isPaused = true;  progressBar.style.animationPlayState = 'paused'; }
+  function pauseAuto()  { isPaused = true; }
   function resumeAuto() { isPaused = false; }
 
-  /* ── 11. Eventos: flechas ──────────────────────────── */
-  btnPrev.addEventListener('click', () => { goPrev(); startAuto(); });
-  btnNext.addEventListener('click', () => { goNext(); startAuto(); });
-
-  /* ── 12. Teclado ───────────────────────────────────── */
+  /* ── 10. Teclado ───────────────────────────────────── */
   document.addEventListener('keydown', (e) => {
     /* Solo actuar si el hero es visible */
     if (window.scrollY > window.innerHeight * 0.6) return;
@@ -391,7 +306,7 @@
     if (e.key === 'ArrowRight') { goNext(); startAuto(); }
   });
 
-  /* ── 13. Touch / swipe ─────────────────────────────── */
+  /* ── 11. Touch / swipe ─────────────────────────────── */
   carousel.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].clientX;
   }, { passive: true });
@@ -404,20 +319,16 @@
     }
   }, { passive: true });
 
-  /* ── 14. Pausar al hover ───────────────────────────── */
+  /* ── 12. Pausar al hover ───────────────────────────── */
   if (PAUSE_HOVER) {
     carousel.addEventListener('mouseenter', pauseAuto);
     carousel.addEventListener('mouseleave', resumeAuto);
   }
 
-  /* ── 15. Init ──────────────────────────────────────── */
+  /* ── 13. Init ──────────────────────────────────────── */
   buildSlides();
-  buildDots();
   updateUI(0);
   startAuto();
-
-  /* Actualizar total en DOM */
-  if (elTotal) elTotal.textContent = total;
 
 })(); /* fin initHeroCarousel */
 
@@ -479,131 +390,86 @@
   imgs.forEach(img => io.observe(img));
 })();
 
-/* ── Material search (real-time filter) ── */
-(function initMaterialSearch() {
-  const input      = document.getElementById('materialSearch');
-  const clearBtn     = document.getElementById('clearSearch');
-  const countEl      = document.getElementById('searchCount');
-  const noResults    = document.getElementById('noResults');
-  const noResultsBtn = document.getElementById('noResultsClear');
-  const grid         = document.getElementById('materialsGrid');
-  if (!input || !grid) return;
+/* ── Material tabs (filtrado rápido por categoría) ──
+   Las pestañas de categoría son el único filtro del catálogo:
+   togglean qué bandas del acordeón quedan visibles. */
+(function initMaterialsCatalog() {
+  const grid = document.getElementById('materialsGrid');
+  if (!grid) return;
 
-  const allCards   = Array.from(grid.querySelectorAll('.mat-card'));
+  const tabs      = Array.from(document.querySelectorAll('.mat-tab:not(.mat-tab--more)'));
+  const extraTabs = tabs.filter(t => t.classList.contains('mat-tab--extra'));
+  const moreBtn   = document.getElementById('tabsMoreBtn');
+  const allItems  = Array.from(grid.querySelectorAll('.mat-accordion-item'));
 
-  function updateCount(visible) {
-    countEl.textContent = visible === allCards.length
-      ? ''
-      : `${visible} resultado${visible !== 1 ? 's' : ''} encontrado${visible !== 1 ? 's' : ''}`;
-  }
+  let activeTab = 'all';
 
-  function filterCards(query) {
-    const q = query.trim().toLowerCase();
-    let visible = 0;
-
-    allCards.forEach(card => {
-      const name = (card.dataset.name || '').toLowerCase();
-      const cat  = (card.dataset.category || '').toLowerCase();
-      const match = !q || name.includes(q) || cat.includes(q);
-      card.classList.toggle('hidden', !match);
-      if (match) visible++;
-    });
-
-    if (noResults)    noResults.hidden = visible > 0;
-    /* El botón "Ver todos los demás materiales" solo aparece cuando se busca */
-    if (noResultsBtn) noResultsBtn.hidden = !(visible === 0 && q);
-    grid.style.display = visible === 0 ? 'none' : '';
-    updateCount(visible);
-    clearBtn.hidden = !q;
-  }
-
-  input.addEventListener('input', () => filterCards(input.value));
-
-  clearBtn.addEventListener('click', () => {
-    input.value = '';
-    input.focus();
-    filterCards('');
+  /* Contador de materiales por pestaña (se calcula una sola vez) */
+  tabs.forEach(tab => {
+    const countBadge = tab.querySelector('[data-count]');
+    if (!countBadge) return;
+    const filterValue = tab.dataset.filter;
+    const total = filterValue === 'all'
+      ? allItems.length
+      : allItems.filter(c => c.dataset.category === filterValue).length;
+    countBadge.textContent = total;
   });
 
-  /* Sync with header search */
-  const headerSearch = document.getElementById('headerSearch');
-  if (headerSearch) {
-    headerSearch.addEventListener('input', () => {
-      input.value = headerSearch.value;
-      filterCards(headerSearch.value);
+  function applyView() {
+    allItems.forEach(item => {
+      const show = activeTab === 'all' || item.dataset.category === activeTab;
+      item.classList.toggle('hidden', !show);
     });
   }
 
-  window.clearSearch = function () {
-    input.value = '';
-    filterCards('');
-  };
-
-  /* Pre-filter from URL query param ?q=... */
-  const urlQ = new URLSearchParams(window.location.search).get('q');
-  if (urlQ) {
-    input.value = urlQ;
-    filterCards(urlQ);
-  }
-})();
-
-/* ── Category filter pills ── */
-(function initFilterPills() {
-  const pills    = document.querySelectorAll('.filter-pill');
-  const allCards = Array.from(document.querySelectorAll('.mat-card'));
-  const noRes    = document.getElementById('noResults');
-  const noResBtn = document.getElementById('noResultsClear');
-  const grid     = document.getElementById('materialsGrid');
-  if (!pills.length) return;
-
-  function applyFilter(filterValue) {
-    let visible = 0;
-    allCards.forEach(card => {
-      const show = filterValue === 'all' || card.dataset.category === filterValue;
-      card.classList.toggle('hidden', !show);
-      if (show) visible++;
-    });
-    if (noRes)    noRes.hidden = visible > 0;
-    /* El botón es solo para búsquedas, no para filtros por categoría */
-    if (noResBtn) noResBtn.hidden = true;
-    if (grid)     grid.style.display = visible === 0 ? 'none' : '';
-  }
-
-  pills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      pills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      applyFilter(pill.dataset.filter);
+  /* ── Pestañas ── */
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-pressed', 'false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-pressed', 'true');
+      activeTab = tab.dataset.filter;
+      applyView();
     });
   });
 
-  /* Pre-filtrar desde URL query param ?filter=Chapas etc. */
-  const urlFilter = new URLSearchParams(window.location.search).get('filter');
-  if (urlFilter) {
-    const matchPill = Array.from(pills).find(p => p.dataset.filter === urlFilter);
-    if (matchPill) {
-      pills.forEach(p => p.classList.remove('active'));
-      matchPill.classList.add('active');
-      applyFilter(urlFilter);
-      /* Scroll suave hasta la sección de materiales */
-      document.getElementById('materiales')?.scrollIntoView({ behavior: 'smooth' });
+  /* ── "Mostrar más" / "Mostrar menos" ── */
+  function setExtraTabsVisible(visible) {
+    extraTabs.forEach(t => { t.hidden = !visible; });
+    if (moreBtn) {
+      moreBtn.setAttribute('aria-expanded', String(visible));
+      const label = moreBtn.querySelector('.mat-tab__more-label');
+      if (label) label.textContent = visible ? 'Mostrar menos' : 'Mostrar más';
     }
   }
-})();
 
-/* ── Header search submit → scroll to materials or navigate ── */
-window.handleSearchSubmit = function (e) {
-  e.preventDefault();
-  const matSection = document.getElementById('materiales');
-  const searchVal  = document.getElementById('headerSearch')?.value || '';
-  if (matSection) {
-    matSection.scrollIntoView({ behavior: 'smooth' });
-  } else {
-    /* Estamos en otra página → navegar a materiales.html con query */
-    const q = encodeURIComponent(searchVal.trim());
-    window.location.href = q ? `materiales.html?q=${q}` : 'materiales.html';
+  if (moreBtn) {
+    moreBtn.addEventListener('click', () => {
+      const isExpanded = moreBtn.getAttribute('aria-expanded') === 'true';
+      setExtraTabsVisible(!isExpanded);
+    });
   }
-};
+
+  /* Pre-seleccionar pestaña desde la URL: ?filter=Chapas (usado por el footer/menú) */
+  const urlFilter = new URLSearchParams(window.location.search).get('filter');
+  if (urlFilter) {
+    const matchTab = tabs.find(t => t.dataset.filter === urlFilter);
+    if (matchTab) {
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-pressed', 'false'); });
+      matchTab.classList.add('active');
+      matchTab.setAttribute('aria-pressed', 'true');
+      activeTab = urlFilter;
+      /* Si la pestaña activada está entre las "extra", desplegarlas */
+      if (matchTab.classList.contains('mat-tab--extra')) setExtraTabsVisible(true);
+    }
+  }
+
+  applyView();
+
+  if (urlFilter) {
+    document.getElementById('materiales')?.scrollIntoView({ behavior: 'smooth' });
+  }
+})();
 
 /* ── Contact form validation + Formspree ── */
 (function initContactForm() {
@@ -726,6 +592,154 @@ window.closeConsult = function () {
   if (modal) modal.hidden = true;
   document.body.style.overflow = '';
 };
+
+/* ── Acordeón de materiales (banda full-width por producto) ──
+   Cada <article class="mat-accordion-item"> arranca vacío: este bloque
+   arma el header (banda con foto) y el panel (galería + specs + usos)
+   a partir de sus data-*. Agregar un material nuevo es sumar un
+   <article> más en el HTML con los mismos atributos:
+   - data-category, data-name                  → obligatorios
+   - data-badge + data-badge-variant            → "stock" (verde) o "featured" (azul)
+   - data-gallery="img1.jpg,img2.jpg"           → 1 o más fotos (separadas por coma)
+   - data-desc="..."                            → descripción corta
+   - data-specs="Calibre 25|1,10m de ancho"      → chips de medidas/calibres
+   - data-specs-title="Medidas y calibre"        → título de esos chips (opcional)
+   - data-bullets="Uso 1|Uso 2|Uso 3"            → lista con viñetas
+   - data-bullets-title="Acabados disponibles"   → título de esa lista (opcional,
+     por defecto "Usos y aplicaciones")
+   - data-ficha="assets/fichas/x.pdf"            → habilita "Descargar Ficha Técnica" */
+(function initMaterialsAccordion() {
+  const grid  = document.getElementById('materialsGrid');
+  if (!grid) return;
+
+  const items = Array.from(grid.querySelectorAll('.mat-accordion-item'));
+  if (!items.length) return;
+
+  const CHEVRON_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`;
+  const PREV_SVG    = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>`;
+  const NEXT_SVG    = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>`;
+  const FICHA_SVG   = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9.5 15.5 12 18l2.5-2.5"/></svg>`;
+
+  items.forEach((item, idx) => {
+    const name         = item.dataset.name || '';
+    const category     = item.dataset.category || '';
+    const badge        = item.dataset.badge || '';
+    const badgeVariant = item.dataset.badgeVariant === 'featured' ? 'featured' : 'stock';
+    const desc         = item.dataset.desc || '';
+    const specs        = item.dataset.specs   ? item.dataset.specs.split('|').map(s => s.trim()).filter(Boolean)   : [];
+    const specsTitle   = item.dataset.specsTitle || 'Medidas disponibles';
+    const bullets      = item.dataset.bullets ? item.dataset.bullets.split('|').map(s => s.trim()).filter(Boolean) : [];
+    const bulletsTitle = item.dataset.bulletsTitle || 'Usos y aplicaciones';
+    const ficha        = item.dataset.ficha || '';
+    const images       = item.dataset.gallery ? item.dataset.gallery.split(',').map(s => s.trim()).filter(Boolean) : [];
+    const headerImg    = images[0] || '';
+    const multi        = images.length > 1;
+    const panelId      = `matPanel${idx}`;
+    const headerId     = `matHeader${idx}`;
+
+    /* ── Header: banda full-width con foto de fondo ── */
+    const header = document.createElement('button');
+    header.type = 'button';
+    header.className = 'mat-accordion-item__header';
+    header.id = headerId;
+    header.setAttribute('aria-expanded', 'false');
+    header.setAttribute('aria-controls', panelId);
+    header.innerHTML = `
+      <img class="mat-accordion-item__bg" src="${headerImg}" alt="" loading="lazy" />
+      <span class="mat-accordion-item__overlay" aria-hidden="true"></span>
+      <span class="mat-accordion-item__text">
+        ${badge ? `<span class="badge-pill badge-pill--${badgeVariant}">${badge}</span>` : ''}
+        <span class="mat-accordion-item__category">${category}</span>
+        <span class="mat-accordion-item__name">${name}</span>
+      </span>
+      <span class="mat-accordion-item__chevron" aria-hidden="true">${CHEVRON_SVG}</span>
+    `;
+
+    /* ── Panel: galería + specs + usos + consultar ── */
+    const panel = document.createElement('div');
+    panel.className = 'mat-accordion-item__panel';
+    panel.id = panelId;
+    panel.setAttribute('role', 'region');
+    panel.setAttribute('aria-labelledby', headerId);
+    panel.hidden = true;
+    panel.innerHTML = `
+      <div class="detail__grid">
+        <div class="detail__gallery">
+          <div class="detail__main-img-wrap">
+            <button type="button" class="detail__nav-btn detail__nav-btn--prev" aria-label="Imagen anterior" ${multi ? '' : 'hidden'}>${PREV_SVG}</button>
+            <img class="detail__main-img" src="${headerImg}" alt="${name}" />
+            <button type="button" class="detail__nav-btn detail__nav-btn--next" aria-label="Imagen siguiente" ${multi ? '' : 'hidden'}>${NEXT_SVG}</button>
+          </div>
+          <div class="detail__thumbs" ${multi ? '' : 'hidden'}>
+            ${images.map((src, i) => `<button type="button" class="detail__thumb${i === 0 ? ' active' : ''}" data-idx="${i}" aria-label="Imagen ${i + 1}"><img src="${src}" alt="" loading="lazy" /></button>`).join('')}
+          </div>
+        </div>
+        <div class="detail__info">
+          <p class="detail__desc" ${desc ? '' : 'hidden'}>${desc}</p>
+          ${specs.length ? `
+          <div class="detail__specs-section">
+            <p class="detail__specs-title">${specsTitle}</p>
+            <div class="detail__specs">${specs.map(s => `<span class="detail__spec-chip">${s}</span>`).join('')}</div>
+          </div>` : ''}
+          ${bullets.length ? `
+          <div class="detail__bullets-section">
+            <p class="detail__bullets-title">${bulletsTitle}</p>
+            <ul class="detail__bullets">${bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+          </div>` : ''}
+          ${ficha ? `<a class="detail__ficha" href="${ficha}" target="_blank" rel="noopener noreferrer">${FICHA_SVG}Descargar Ficha Técnica</a>` : ''}
+          <div class="detail__actions">
+            <button type="button" class="btn btn--primary btn--lg btn--full detail__consult-btn">Consultar este producto</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    item.appendChild(header);
+    item.appendChild(panel);
+
+    /* ── Galería: prev/next/miniaturas, estado propio de este item ── */
+    if (multi) {
+      let current = 0;
+      const mainImg   = panel.querySelector('.detail__main-img');
+      const thumbBtns = Array.from(panel.querySelectorAll('.detail__thumb'));
+      const prevBtn   = panel.querySelector('.detail__nav-btn--prev');
+      const nextBtn   = panel.querySelector('.detail__nav-btn--next');
+
+      function goTo(i) {
+        current = (i + images.length) % images.length;
+        mainImg.src = images[current];
+        thumbBtns.forEach((b, bi) => b.classList.toggle('active', bi === current));
+      }
+      prevBtn.addEventListener('click', () => goTo(current - 1));
+      nextBtn.addEventListener('click', () => goTo(current + 1));
+      thumbBtns.forEach((btn, i) => btn.addEventListener('click', () => goTo(i)));
+    }
+
+    /* ── Botón "Consultar este producto" ── */
+    panel.querySelector('.detail__consult-btn').addEventListener('click', () => {
+      window.openConsult(name);
+    });
+
+    /* ── Abrir / cerrar banda (un solo panel abierto a la vez) ── */
+    header.addEventListener('click', () => {
+      const isOpen = header.getAttribute('aria-expanded') === 'true';
+
+      items.forEach(other => {
+        const otherHeader = other.querySelector('.mat-accordion-item__header');
+        const otherPanel  = other.querySelector('.mat-accordion-item__panel');
+        if (!otherHeader || !otherPanel) return;
+        otherHeader.setAttribute('aria-expanded', 'false');
+        otherPanel.hidden = true;
+      });
+
+      if (!isOpen) {
+        header.setAttribute('aria-expanded', 'true');
+        panel.hidden = false;
+        header.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  });
+})();
 
 /* Close modal on Escape */
 document.addEventListener('keydown', (e) => {

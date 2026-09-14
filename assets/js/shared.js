@@ -24,73 +24,11 @@
   /* Detectar página activa desde atributo data-page del <body> */
   const activePage = document.body.dataset.page || 'inicio';
 
-  /* ── Categorías del dropdown de Materiales ── */
-  const MAT_CATEGORIES = [
-    {
-      label: 'Todos los materiales',
-      href:  'materiales.html',
-      icon:  `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>`,
-    },
-    {
-      label: 'Chapas',
-      href:  'materiales.html?filter=Chapas',
-      icon:  `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9h20M2 15h20M2 3h20M2 21h20"/></svg>`,
-    },
-    {
-      label: 'Perfiles',
-      href:  'materiales.html?filter=Perfiles',
-      icon:  `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h6"/></svg>`,
-    },
-    {
-      label: 'Tornillos',
-      href:  'materiales.html?filter=Tornillos',
-      icon:  `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>`,
-    },
-  ];
-
-  /* ── Chevron SVG reutilizable ── */
-  const CHEVRON_SVG = `<svg class="nav__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`;
-
   /* ── Builder del header ── */
   function buildHeader() {
     const navItems = NAV_PAGES.map(p => {
       const isActive = p.key === activePage;
 
-      /* Entrada especial: Materiales → tiene dropdown */
-      if (p.key === 'materiales') {
-        const dropItems = MAT_CATEGORIES.map((cat, idx) => `
-          ${idx === 1 ? '<li class="nav__dropdown-divider" role="separator"></li>' : ''}
-          <li role="none">
-            <a href="${cat.href}" class="nav__dropdown-link" role="menuitem">
-              ${cat.icon}
-              ${cat.label}
-            </a>
-          </li>`).join('');
-
-        return `
-      <li class="nav__item nav__item--has-dropdown" role="none">
-        <div class="nav__link-group">
-          <a href="${p.href}"
-             class="nav__link${isActive ? ' active' : ''}"
-             ${isActive ? 'aria-current="page"' : ''}
-             role="menuitem">
-            ${p.label}
-          </a>
-          <button class="nav__dropdown-toggle"
-                  aria-label="Ver categorías de materiales"
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  type="button">
-            ${CHEVRON_SVG}
-          </button>
-        </div>
-        <ul class="nav__dropdown" role="menu" aria-label="Categorías de materiales">
-          ${dropItems}
-        </ul>
-      </li>`;
-      }
-
-      /* Resto de páginas → link normal */
       return `
       <li role="none">
         <a href="${p.href}"
@@ -116,22 +54,6 @@
              role="navigation" aria-label="Navegación principal">
           <ul class="nav__list" role="menubar">${navItems}</ul>
         </nav>
-
-        <!-- Buscador (solo visible en materiales) -->
-        <div class="header__search">
-          <form class="search-form" role="search" onsubmit="handleSearchSubmit(event)">
-            <input type="search" id="headerSearch" class="search-form__input"
-                   placeholder="Buscar materiales…" aria-label="Buscar materiales"
-                   autocomplete="off" />
-            <button type="submit" class="search-form__btn" aria-label="Buscar">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="2.5"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-              </svg>
-            </button>
-          </form>
-        </div>
 
         <!-- Hamburger -->
         <button class="header__hamburger" id="hamburger"
